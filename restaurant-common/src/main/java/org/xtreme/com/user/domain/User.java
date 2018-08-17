@@ -1,6 +1,9 @@
 package org.xtreme.com.user.domain;
 
+import java.util.List;
+
 import org.springframework.data.annotation.Id;
+import org.xtreme.com.auth.domain.RefreshToken;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -30,4 +33,6 @@ public class User {
 	@ApiModelProperty(value = "John Doe")
 	private String name;
 	private String status;
+	private List<RefreshToken> refreshTokens;
+	private String salt;
 }

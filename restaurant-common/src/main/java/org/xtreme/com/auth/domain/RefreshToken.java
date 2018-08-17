@@ -13,5 +13,4 @@ public class RefreshToken {
 	private String issuedAt;
 	private String tokenId;
 	private String audience;
-	private String ssoRefreshToken;
 }

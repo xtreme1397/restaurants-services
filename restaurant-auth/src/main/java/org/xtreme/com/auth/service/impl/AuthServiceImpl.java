@@ -23,6 +23,7 @@ import org.xtreme.com.auth.service.AuthService;
 import org.xtreme.com.auth.util.JwtUtil;
 import org.xtreme.com.auth.util.RefreshTokenUtil;
 import org.xtreme.com.system.consts.EntityStatus;
+import org.xtreme.com.system.util.PasswordHashUtil;
 import org.xtreme.com.user.data.UserRepository;
 import org.xtreme.com.user.domain.User;
 
@@ -116,5 +117,13 @@ public class AuthServiceImpl implements AuthService {
 		oAuthToken.setRefreshTokenExpiresIn(oAuthRefreshToken.getExpiresIn());
 		oAuthToken.setRefreshTokenIssuedAt(oAuthRefreshToken.getIssuedAt());
 		return oAuthToken;
+	}
+
+	@Override
+	public User signup(User user) {
+		String salt = PasswordHashUtil.getSalt();
+		user.setSalt(salt);
+		user.setPassword(PasswordHashUtil.getSecurePassword(PasswordHashUtil.decode(user.getPassword()), salt));
+		return userRepository.insert(user);
 	}
 }

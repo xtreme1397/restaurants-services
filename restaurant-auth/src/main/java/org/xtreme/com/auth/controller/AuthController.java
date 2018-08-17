@@ -15,6 +15,7 @@ import org.springframework.security.web.authentication.logout.SecurityContextLog
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -54,6 +55,16 @@ public class AuthController {
 		String device = UrlUtil.getDevice(req);
 		Token token = authService.login(userName, password, audience, device);
 		return new ResponseEntity<>(token, HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/signup", method = RequestMethod.POST)
+	@ApiOperation(value = "Signup", notes = "It creates and returns the new user")
+	@ApiResponses(value = { @ApiResponse(code = 201, message = "Signup Success", response = User.class) })
+	public User signup(@RequestBody User user) {
+		if (user == null) {
+			throw new RequestException(103);
+		}
+		return authService.signup(user);
 	}
 
 	@RequestMapping(value = "/logout/{userName}/{redirectUri}", method = RequestMethod.GET)

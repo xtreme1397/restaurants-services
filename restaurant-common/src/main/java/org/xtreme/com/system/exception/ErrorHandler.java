@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+
+
 @Service
 public class ErrorHandler {
 	private static final Logger LOGGER = LoggerFactory.getLogger(ErrorHandler.class);
@@ -55,6 +57,25 @@ public class ErrorHandler {
 			}
 		} else {
 			error = new Error(900, ex.getMessage(), HttpStatus.BAD_REQUEST.value());
+		}
+		return error;
+	}
+
+	@ExceptionHandler(ServiceException.class)
+	@ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
+	@ResponseBody
+	public Error processServiceExceptions(ServiceException ex) {
+		Error error = null;
+		Throwable cause = ex;
+		while (cause.getCause() != null && cause.getCause() instanceof ServiceException) {
+			cause = cause.getCause();
+		}
+		if (cause.getCause() == null && cause instanceof ServiceException) {
+			LOGGER.error("Unprocessible entity : ", ex);
+			error = new Error(922, ex.getMessage(), HttpStatus.UNPROCESSABLE_ENTITY.value());
+		} else {
+			LOGGER.error("Unhandled error occured at runtime : ", ex);
+			error = new Error(910, ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR.value());
 		}
 		return error;
 	}

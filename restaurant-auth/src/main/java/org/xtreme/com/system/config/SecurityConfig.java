@@ -23,8 +23,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 
 	@Override
-	protected void configure(final HttpSecurity http) throws Exception {
-		http.csrf().disable().authorizeRequests().antMatchers(allowedEndPoints()).permitAll();
+	protected void configure(final HttpSecurity httpSecurity) throws Exception {
+		httpSecurity.csrf().disable();
 	}
 
 	@Override
@@ -44,6 +44,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 
 	private String[] allowedEndPoints() {
-		return new String[] { "/auth/v1/login**", "/auth/v1/logout/**", "/auth/v1/refreshToken" };
+		return new String[] { "/auth/v1/signup","/auth/v1/login**", "/auth/v1/logout/**", "/auth/v1/refreshToken", "/favicon.ico",
+				"/css/**", "/js/**", "/auth/v2/api-docs", "/auth/configuration/ui", "/icons/**", "//icons/**",
+				"/auth/swagger-resources", "/auth/configuration/security", "/auth/swagger-ui.html",
+				"/auth/webjars/**", };
 	}
 }

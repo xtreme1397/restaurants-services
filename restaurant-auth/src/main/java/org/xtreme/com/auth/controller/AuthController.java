@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import org.xtreme.com.auth.domain.GrantType;
+import org.xtreme.com.auth.consts.GrantType;
 import org.xtreme.com.auth.domain.RefreshTokenPayload;
 import org.xtreme.com.auth.domain.Token;
 import org.xtreme.com.auth.service.AuthService;

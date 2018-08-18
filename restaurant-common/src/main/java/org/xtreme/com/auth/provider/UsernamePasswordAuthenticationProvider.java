@@ -9,7 +9,7 @@ import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
-import org.xtreme.com.auth.domain.AuthenticationToken;
+import org.xtreme.com.auth.domain.UserSession;
 import org.xtreme.com.system.consts.EntityStatus;
 import org.xtreme.com.system.util.PasswordHashUtil;
 import org.xtreme.com.user.data.UserRepository;
@@ -53,6 +53,6 @@ public class UsernamePasswordAuthenticationProvider implements AuthenticationPro
 
 	@Override
 	public boolean supports(Class<?> authentication) {
-		return authentication.equals(AuthenticationToken.class);
+		return authentication.equals(UserSession.class);
 	}
 }

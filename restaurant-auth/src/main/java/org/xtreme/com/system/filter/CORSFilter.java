@@ -1,4 +1,4 @@
-package org.xtreme.com.system.config.filter;
+package org.xtreme.com.system.filter;
 
 import java.io.IOException;
 
@@ -11,12 +11,6 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * This class is a filter for giving Access Headers to solve CORS
- * 
- * @author Mindtree Ltd.
- *
- */
 public class CORSFilter implements Filter {
 
 	/**

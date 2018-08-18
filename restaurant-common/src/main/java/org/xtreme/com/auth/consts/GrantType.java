@@ -1,4 +1,4 @@
-package org.xtreme.com.auth.domain;
+package org.xtreme.com.auth.consts;
 
 public enum GrantType {
 	REFRESH_TOKEN("refresh_token");

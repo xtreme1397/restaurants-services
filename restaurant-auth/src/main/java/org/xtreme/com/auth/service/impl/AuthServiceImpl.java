@@ -15,7 +15,7 @@ import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.ProviderNotFoundException;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
-import org.xtreme.com.auth.domain.AuthenticationToken;
+import org.xtreme.com.auth.domain.UserSession;
 import org.xtreme.com.auth.domain.RefreshToken;
 import org.xtreme.com.auth.domain.Token;
 import org.xtreme.com.auth.domain.TokenProps;
@@ -31,7 +31,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
-@Service("userService")
+@Service()
 public class AuthServiceImpl implements AuthService {
 	private static final Logger LOGGER = LoggerFactory.getLogger(AuthServiceImpl.class);
 	@Autowired
@@ -47,7 +47,7 @@ public class AuthServiceImpl implements AuthService {
 	@Override
 	public Token login(String username, String password, String audience, String ipAddress) {
 		LOGGER.info("Validating credentials for user {}", username);
-		Authentication auth = new AuthenticationToken(username, password);
+		Authentication auth = new UserSession(username, password);
 		try {
 			authManager.authenticate(auth);
 			return generateJwtToken(username, audience, ipAddress, false, null);

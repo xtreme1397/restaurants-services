@@ -10,11 +10,11 @@ import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class AuthUser extends User {
+public class LoggedInUser extends User {
 	private static final long serialVersionUID = 3102294056807388456L;
 	private String name = null;
 
-	public AuthUser(String username, String password, Collection<? extends GrantedAuthority> authorities, String name) {
+	public LoggedInUser(String username, String password, Collection<? extends GrantedAuthority> authorities, String name) {
 		super(username, password, authorities);
 		this.name = name;
 	}

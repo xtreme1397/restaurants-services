@@ -14,6 +14,7 @@ import org.xtreme.com.studio.order.consts.OrderStatus;
 import org.xtreme.com.studio.order.data.OrderRepository;
 import org.xtreme.com.studio.order.domain.Order;
 import org.xtreme.com.studio.order.service.OrderService;
+
 @Service()
 public class OrderServiceImpl implements OrderService {
 	private static final Logger LOGGER = LoggerFactory.getLogger(OrderService.class);
@@ -21,8 +22,7 @@ public class OrderServiceImpl implements OrderService {
 	OrderRepository orderRepository;
 
 	@Override
-	public Order createOrder(Order order, UserSession authUser) {
-		LoggedInUser loggedInUser = (LoggedInUser) authUser.getPrincipal();
+	public Order createOrder(Order order, LoggedInUser loggedInUser) {
 		LOGGER.info("new item creation requset came from : {}", loggedInUser.getName());
 		order.setStatus(OrderStatus.INPROGRESS.getValue());
 		order.setCreatedBy(loggedInUser.getName());

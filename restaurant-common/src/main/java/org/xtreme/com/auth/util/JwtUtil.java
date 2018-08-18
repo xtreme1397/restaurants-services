@@ -54,9 +54,8 @@ public class JwtUtil {
 		Builder tokenBuilder = JWT.create().withIssuer(issuer).withIssuedAt(issuedAt)
 				.withAudience(jwtTokenProps.getAudience()).withNotBefore(issuedAt)
 				.withClaim("name", jwtTokenProps.getName()).withClaim("upn", jwtTokenProps.getUpn())
-				.withClaim("unique_name", jwtTokenProps.getUpn()).withClaim("status", jwtTokenProps.getStatus())
-				.withExpiresAt(jwtTokenProps.getExpiresAt());
-		tokenBuilder.withClaim("upn", jwtTokenProps.getUpn()).withClaim("email", jwtTokenProps.getEmail());
+				.withClaim("email", jwtTokenProps.getEmail()).withClaim("unique_name", jwtTokenProps.getUpn())
+				.withClaim("status", jwtTokenProps.getStatus()).withExpiresAt(jwtTokenProps.getExpiresAt());
 		RefreshToken refreshToken = refreshTokenUtill.generate(instant, jwtTokenProps.getUpn(),
 				jwtTokenProps.getIpAddress(), jwtTokenProps.getAudience());
 		token.setRefreshTokenId(refreshToken.getTokenId());
@@ -79,7 +78,7 @@ public class JwtUtil {
 		} else {
 			JWTVerifier verifier = JWT.require(Algorithm.HMAC256(SECRET_KEY)).withIssuer(issuer).build(); // Reusable
 			jwt = (JWT) verifier.verify(token.trim().substring(7).trim());
-			this.audienceCheck(audience, jwt);
+			// this.audienceCheck(audience, jwt);
 		}
 		return jwt;
 	}

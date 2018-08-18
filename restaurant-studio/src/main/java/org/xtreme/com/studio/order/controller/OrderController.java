@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.xtreme.com.auth.domain.LoggedInUser;
 import org.xtreme.com.auth.domain.UserSession;
 import org.xtreme.com.studio.order.domain.Order;
 import org.xtreme.com.studio.order.service.OrderService;
@@ -25,15 +26,15 @@ public class OrderController {
 
 	@RequestMapping(value = "/orders", method = RequestMethod.POST)
 	public Order createOrder(@RequestBody Order order, Authentication authentication) {
-		UserSession session = (UserSession) authentication.getPrincipal();
-		LOGGER.info("create order request from {}", session.getPrincipal());
-		return orderService.createOrder(order, session);
+		LoggedInUser loggedInUser = (LoggedInUser) authentication.getPrincipal();
+		LOGGER.info("create order request from {}", loggedInUser.getName());
+		return orderService.createOrder(order, loggedInUser);
 	}
 
 	@RequestMapping(value = "/orders", method = RequestMethod.GET)
 	public List<Order> getorders(Pageable pageable, Authentication authentication) {
-		UserSession session = (UserSession) authentication.getPrincipal();
-		LOGGER.info("get orders request from {}", session.getPrincipal());
+		LoggedInUser loggedInUser = (LoggedInUser) authentication.getPrincipal();
+		LOGGER.info("get orders request from {}", loggedInUser.getName());
 		return orderService.getOrders(pageable);
 	}
 }

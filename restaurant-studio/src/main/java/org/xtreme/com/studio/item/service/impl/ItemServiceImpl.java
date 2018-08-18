@@ -9,10 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.xtreme.com.auth.domain.LoggedInUser;
-import org.xtreme.com.auth.domain.UserSession;
 import org.xtreme.com.studio.item.data.ItemRepository;
 import org.xtreme.com.studio.item.domain.Item;
 import org.xtreme.com.studio.item.service.ItemService;
+
 @Service()
 public class ItemServiceImpl implements ItemService {
 	private static final Logger LOGGER = LoggerFactory.getLogger(ItemServiceImpl.class);
@@ -20,8 +20,7 @@ public class ItemServiceImpl implements ItemService {
 	ItemRepository itemRepository;
 
 	@Override
-	public Item addItem(Item item, UserSession authUser) {
-		LoggedInUser loggedInUser = (LoggedInUser) authUser.getPrincipal();
+	public Item addItem(Item item, LoggedInUser loggedInUser) {
 		LOGGER.info("new item creation requset came from : {}", loggedInUser.getName());
 		item.setCreatedBy(loggedInUser.getName());
 		item.setCreatedAt(new Date());

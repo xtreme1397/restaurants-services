@@ -87,8 +87,7 @@ public class SecurityFilter extends GenericFilterBean {
 			Optional<String> authToken, String audience) throws UnsupportedEncodingException {
 		JWT jwt = jwtUtil.verify(authToken.get(), audience);
 		Map<String, Claim> claims = jwt.getClaims();
-		List<GrantedAuthority> authorities = AuthorityUtils
-				.commaSeparatedStringToAuthorityList(StringUtils.join(claims.get("scp").asArray(String.class), ","));
+		List<GrantedAuthority> authorities = AuthorityUtils.commaSeparatedStringToAuthorityList("");
 		LoggedInUser authUser = new LoggedInUser(claims.get("upn").asString(), "N/A", authorities,
 				claims.get("name").asString());
 		return new UserSession(authUser, null, authorities);

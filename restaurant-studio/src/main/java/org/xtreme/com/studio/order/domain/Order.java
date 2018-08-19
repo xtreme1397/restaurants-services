@@ -12,10 +12,12 @@ import lombok.Data;
 public class Order {
 	@Id
 	private String orderId;
+	private String customerName;
 	private String price;
 	private String details;
 	private List<Item> items;
 	private Date createdAt;
 	private String status;
 	private String createdBy;
+	private String mobile;
 }

@@ -123,7 +123,9 @@ public class AuthServiceImpl implements AuthService {
 	public User signup(User user) {
 		String salt = PasswordHashUtil.getSalt();
 		user.setSalt(salt);
+		user.setStatus(EntityStatus.ACTIVE.getValue());
 		user.setPassword(PasswordHashUtil.getSecurePassword(PasswordHashUtil.decode(user.getPassword()), salt));
+		LOGGER.info("Signup successful for user {}", user.getUsername());
 		return userRepository.insert(user);
 	}
 }

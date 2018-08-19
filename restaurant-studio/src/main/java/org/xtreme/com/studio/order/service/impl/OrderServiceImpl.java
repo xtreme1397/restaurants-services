@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.xtreme.com.auth.domain.LoggedInUser;
-import org.xtreme.com.auth.domain.UserSession;
 import org.xtreme.com.studio.order.consts.OrderStatus;
 import org.xtreme.com.studio.order.data.OrderRepository;
 import org.xtreme.com.studio.order.domain.Order;

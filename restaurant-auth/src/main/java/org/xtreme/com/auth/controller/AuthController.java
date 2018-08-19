@@ -70,17 +70,15 @@ public class AuthController {
 	@RequestMapping(value = "/logout/{userName}/{redirectUri}", method = RequestMethod.GET)
 	@ApiOperation(value = "Logout", notes = "It deletes the user session data")
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Logout Success", response = User.class) })
-	@ApiImplicitParams({
-			@ApiImplicitParam(name = "Authorization", value = "Authorization OAuthToken", required = true, dataType = "string", paramType = "header") })
-	public void logout(@PathVariable String userName, @PathVariable String redirectUri,
-			@CookieValue(value = "ref_tok", required = false) String refToken, HttpServletRequest req,
-			HttpServletResponse res, Authentication authentication) throws IOException {
+	public String logout(@PathVariable String userName, @PathVariable String redirectUri,
+			@RequestHeader(value = "ref_token") String refToken, HttpServletRequest req, HttpServletResponse res,
+			Authentication authentication) throws IOException {
 		String device = UrlUtil.getDevice(req);
 		if (authentication != null) {
 			new SecurityContextLogoutHandler().logout(req, res, authentication);
 			req.getSession().invalidate();
 		}
-		res.sendRedirect(authService.logout(userName, redirectUri, device, refToken));
+		return authService.logout(userName, redirectUri, device, refToken);
 	}
 
 	@RequestMapping(value = "/refreshToken", method = RequestMethod.POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)

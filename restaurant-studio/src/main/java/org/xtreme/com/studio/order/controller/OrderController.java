@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.xtreme.com.auth.domain.LoggedInUser;
-import org.xtreme.com.auth.domain.UserSession;
 import org.xtreme.com.studio.order.domain.Order;
 import org.xtreme.com.studio.order.service.OrderService;
 

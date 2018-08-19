@@ -20,11 +20,11 @@ mvn spring-boot:run
 ```
 ### Introduction
 This project is a maven multimodule project which basically have 3 modules in it.
-- [restaurant-common]
+-  # restaurant-common #
 -->this project basically have all the common dependency which has been used accross other modules
-- [restaurant-auth]
+- # restaurant-auth #
 -->This is a kind of auth server which will be running independently and will be managing all the authentication and authorization stuff.
-- [restaurant-studio]
+- # restaurant-studio #
 ->This is again a microservice which basically handles all the crud operations.
 
 **Note**:-All the end points of studio are secured and do strict check for the token given by auth server.For Authentication And Authorization here i am using spring security which i have customized according to need.

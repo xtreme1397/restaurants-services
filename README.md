@@ -29,6 +29,6 @@ This project is a maven multimodule project which basically have 3 modules in it
 
 **Note**:-All the end points of studio are secured and do strict check for the token given by auth server.For Authentication And Authorization here i am using spring security which i have customized according to need.
 
-`As a database i have used Mongodb here.
+As a database i have used Mongodb here.
 
 
